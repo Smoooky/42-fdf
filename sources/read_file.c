@@ -1,9 +1,18 @@
-#include "fdf.h"
+#include "../includes/fdf.h"
 
-int word_count(char *str)
+void	check_fd(int fd)
 {
-	char **splited;
-	int res;
+	if (fd == -1)
+	{
+		ft_printf("Wrong file\n");
+		exit(0);
+	}
+}
+
+int	word_count(char *str)
+{
+	char	**splited;
+	int		res;
 
 	splited = ft_split(str, ' ');
 	res = 0;
@@ -12,14 +21,15 @@ int word_count(char *str)
 	return (res);
 }
 
-fdf *get_size(char *file_name, fdf *data)
+t_fdf	*get_size(char *file_name, t_fdf *data)
 {
-	char *line;
-	int fd;
-	int height;
-	int width;
+	char	*line;
+	int		fd;
+	int		height;
+	int		width;
 
-	fd  = open(file_name, O_RDONLY);
+	fd = open(file_name, O_RDONLY);
+	check_fd(fd);
 	height = 1;
 	get_next_line(fd, &line);
 	width = word_count(line);
@@ -32,20 +42,19 @@ fdf *get_size(char *file_name, fdf *data)
 	data->width = width;
 	data->height = height;
 	return (data);
-
 }
 
-fdf *fill_matrix(fdf *data, char *file_name)
+t_fdf	*fill_matrix(t_fdf *data, char *file_name)
 {
 	int		fd;
 	char	*line;
 	int		i;
 	int		j;
-	char 	**nums;
+	char	**nums;
 
 	i = 0;
 	fd = open(file_name, O_RDONLY);
-	while(get_next_line(fd, &line))
+	while (get_next_line(fd, &line))
 	{
 		nums = ft_split(line, ' ');
 		j = 0;
@@ -61,18 +70,17 @@ fdf *fill_matrix(fdf *data, char *file_name)
 	free(nums);
 	close(fd);
 	data->z_matrix[i] = NULL;
-	return(data);
+	return (data);
 }
 
-void read_file(char *file_name, fdf *data)
+void	read_file(char *file_name, t_fdf *data)
 {
 	int		i;
 
-
 	data = get_size(file_name, data);
-	data->z_matrix = (int **)malloc(sizeof(int*) * (data->height + 1));
+	data->z_matrix = (int **)malloc(sizeof(int *) * (data->height + 1));
 	i = 0;
-	while(i <= data->height)
-		data->z_matrix[i++] = (int*) malloc(sizeof(int) *(data->width + 1));
+	while (i <= data->height)
+		data->z_matrix[i++] = (int *) malloc(sizeof(int) *(data->width + 1));
 	data = fill_matrix(data, file_name);
 }
