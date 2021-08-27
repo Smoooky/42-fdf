@@ -1,4 +1,4 @@
-NAME = fdf.out
+NAME = fdf
 OBJ_DIR = ./objects
 SRC_DIR = ./sources
 OBJS =	$(OBJ_DIR)/main.o\

@@ -56,7 +56,7 @@ void	ft_read_from_fd(int *count_bytes, int fd, char **reminder)
 	*reminder = temp;
 }
 
-int	free_rem (char **reminder, int res)
+int	free_rem(char **reminder, int res)
 {
 	free(*reminder);
 	*reminder = NULL;

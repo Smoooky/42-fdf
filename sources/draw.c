@@ -3,10 +3,10 @@
 
 void	add_shift(t_point *a, t_point *b, t_fdf *data)
 {
-	a->x += data->shift;
-	a->y += data->shift;
-	b->x += data->shift;
-	b->y += data->shift;
+	a->x += data->shift_x;
+	a->y += data->shift_y;
+	b->x += data->shift_x;
+	b->y += data->shift_y;
 }
 
 void	add_zoom(t_point *a, t_point *b, t_fdf *data)

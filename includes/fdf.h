@@ -14,7 +14,8 @@ typedef struct s_fdf
 	int		**z_matrix;
 	int		zoom;
 	int		color;
-	int		shift;
+	int		shift_x;
+	int		shift_y;
 	void	*mlx_p;
 	void	*win_p;
 }			t_fdf;

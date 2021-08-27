@@ -4,6 +4,7 @@ void	check_fd(int fd)
 {
 	if (fd == -1)
 	{
+		ft_printf("%i\n", fd);
 		ft_printf("Wrong file\n");
 		exit(0);
 	}
