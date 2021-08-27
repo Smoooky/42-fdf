@@ -1,4 +1,5 @@
 NAME = fdf
+FLAGS = -Wall -Wextra -Werror
 OBJ_DIR = ./objects
 SRC_DIR = ./sources
 OBJS =	$(OBJ_DIR)/main.o\
@@ -26,10 +27,10 @@ all: $(NAME)
 $(NAME): $(OBJ_DIR) $(OBJS) $(HDRS)
 	$(MAKE) -C $(PRINTF)
 	$(MAKE) -C $(MLX)
-	gcc -o $@ $(OBJS) $(LIBS) $(FW)
+	gcc $(FLAGS) -o $@ $(OBJS) $(LIBS) $(FW)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	gcc -c $< -o $@
+	gcc $(FLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir objects
