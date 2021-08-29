@@ -30,7 +30,6 @@ int	deal_key(int key, t_fdf *data)
 	{
 		mlx_destroy_window(data->mlx_p, data->win_p);
 		free_matrix(data);
-		sleep(17);
 		exit(0);
 	}
 	return (0);
