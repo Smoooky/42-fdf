@@ -1,12 +1,9 @@
 #include "../includes/fdf.h"
 
-t_point	create_point(int x, int y)
+void	create_point(t_point *point, int x, int y)
 {
-	t_point	res;
-
-	res.x = x;
-	res.y = y;
-	return (res);
+	point->x = x;
+	point->y = y;
 }
 
 float	maximum(float a, float b)

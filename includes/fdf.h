@@ -29,7 +29,7 @@ typedef struct s_point
 void	read_file(char *file_name, t_fdf *data);
 void	bresenham(t_point a, t_point b, t_fdf *data);
 void	draw(t_fdf *data);
-t_point	create_point(int x, int y);
+void	create_point(t_point *point, int x, int y);
 float	maximum(float a, float b);
 float	modulo(float a);
 void	isometric(float *x, float *y, int z);

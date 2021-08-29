@@ -1,5 +1,4 @@
 #include "../includes/fdf.h"
-#include <math.h>
 
 void	add_shift(t_point *a, t_point *b, t_fdf *data)
 {
@@ -67,9 +66,9 @@ void	draw(t_fdf *data)
 		x = 0;
 		while (x < data->width)
 		{
-			a = create_point(x, y);
-			b = create_point(x + 1, y);
-			c = create_point(x, y + 1);
+			create_point(&a, x, y);
+			create_point(&b, x + 1, y);
+			create_point(&c, x, y + 1);
 			if (x < data->width - 1)
 				bresenham(a, b, data);
 			if (y < data->height - 1)

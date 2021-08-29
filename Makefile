@@ -27,10 +27,14 @@ all: $(NAME)
 $(NAME): $(OBJ_DIR) $(OBJS) $(HDRS)
 	$(MAKE) -C $(PRINTF)
 	$(MAKE) -C $(MLX)
-	gcc $(FLAGS) -o $@ $(OBJS) $(LIBS) $(FW)
+	gcc $(FLAGS) -g -o $@ $(OBJS) $(LIBS) $(FW)
+
+valgrind: $(OBJ_DIR) $(OBJS) $(HDRS)
+	gcc $(FLAGS) -g $(SRC_DIR)/*.c $(LIBS) $(FW)
+	valgrind --tool=memcheck --leak-check=yes ./a.out test_maps/42.fdf
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	gcc $(FLAGS) -c $< -o $@
+	gcc $(FLAGS) -g -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir objects

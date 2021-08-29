@@ -17,34 +17,38 @@ int	word_count(char *str)
 	splited = ft_split(str, ' ');
 	res = 0;
 	while (splited[res] != NULL)
-		res++;
+		free(splited[res++]);
+	free(splited[res]);
+	free(splited);
 	return (res);
 }
 
-t_fdf	*get_size(char *file_name, t_fdf *data)
+void	get_size(char *file_name, t_fdf *data)
 {
 	char	*line;
 	int		fd;
 	int		height;
 	int		width;
 
+	line = NULL;
 	fd = open(file_name, O_RDONLY);
 	check_fd(fd);
 	height = 1;
 	get_next_line(fd, &line);
 	width = word_count(line);
+	free(line);
 	while (get_next_line(fd, &line))
 	{
 		height++;
 		free(line);
 	}
+	free(line);
 	close(fd);
 	data->width = width;
 	data->height = height;
-	return (data);
 }
 
-t_fdf	*fill_matrix(t_fdf *data, char *file_name)
+void	fill_matrix(t_fdf *data, char *file_name)
 {
 	int		fd;
 	char	*line;
@@ -61,26 +65,25 @@ t_fdf	*fill_matrix(t_fdf *data, char *file_name)
 		while (nums[j])
 		{
 			data->z_matrix[i][j] = ft_atoi(nums[j]);
-			j++;
-			free(nums[j]);
+			free(nums[j++]);
 		}
+		free(nums[j]);
+		free(nums);
 		free(line);
 		i++;
 	}
-	free(nums);
+	free(line);
 	close(fd);
-	data->z_matrix[i] = NULL;
-	return (data);
 }
 
 void	read_file(char *file_name, t_fdf *data)
 {
 	int		i;
 
-	data = get_size(file_name, data);
+	get_size(file_name, data);
 	data->z_matrix = (int **)malloc(sizeof(int *) * (data->height + 1));
 	i = 0;
 	while (i <= data->height)
-		data->z_matrix[i++] = (int *) malloc(sizeof(int) *(data->width + 1));
-	data = fill_matrix(data, file_name);
+		data->z_matrix[i++] = (int *) malloc(sizeof(int) * (data->width + 1));
+	fill_matrix(data, file_name);
 }
